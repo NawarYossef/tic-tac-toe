@@ -29,7 +29,7 @@ class Game {
     });
   }
   
-  displayPlayerChoice() {
+  displayAll() {
     let that = this
     $(document).ready(function(){
       $(".square").click(function(){
@@ -59,22 +59,24 @@ class Game {
         
         
         // computer mark
-         console.log(emptySquares);
         $("#" + pos).text(mark2);
         $("#" + pos).css("font-size", "105px");
         // 
         
-      // 
-      // console.log(markedSquares);
-      // console.log(emptySquares);
-      // 
          
         // get player and computer choices
         allComputerChoices.push(pos);
-       allPayerChoices.push(playerMark);
+        allPayerChoices.push(playerMark);
+        //
         
       });
     });
+  }
+  
+  playerChoice() {
+    $(document).ready(function(){
+      
+    })
   }
 
   stylePlayerChoice(){
@@ -108,15 +110,14 @@ class Game {
     });
   }
   
-  // collectComputerChoices() {
-  //   $(document).ready(function(){
-  //     $(".square").click(function(){
-  //         let mark = Number($(this).attr('id'));
-  //         allComputerChoices.push(mark);
-  //         // console.log(allComputerChoices)
-  //     });
-  //   });
-  // }
+  collectComputerChoices() {
+    $(document).ready(function(){
+      $(".square").click(function(){
+          let mark = Number($(this).attr('id'));
+          allComputerChoices.push(mark);
+      });
+    });
+  }
   
   
   computerStyleChoice(pos) {
@@ -131,9 +132,10 @@ var ttt = new Game();
   
   // ttt.getEmptySquares();
   // ttt.getMarkedSquares();
-  ttt.displayPlayerChoice();
+  ttt.displayAll();
   ttt.stylePlayerChoice();
   // ttt.collectPlayerChoices();
+  // ttt.collectComputerChoices();
    
 
 
