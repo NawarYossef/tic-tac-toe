@@ -1,0 +1,36 @@
+// @import url("whitespace-reset.css");
+
+// === COLORS ===
+$square-color: #3f587f;
+$border-color: #ffffff;
+
+// === FONTS ===
+$mark-font: 105px;
+
+// === SIZES ===
+$body-height: 100%;
+$container-width: 100%;
+$body-height: 100%;
+$square-height: 150px;
+
+
+// === STYLE ===
+
+body {
+	background-color: black !important;
+	height: $body-height;
+
+	.container-fluid {
+    width: $container-width;
+    margin: 8% auto 0 auto;
+
+    	.square {
+    	background-color: $square-color;
+    	border: 1px solid $border-color;
+    	height: $square-height;
+    	box-sizing: border-box;
+    	overflow: hidden;
+
+		}
+	}
+}

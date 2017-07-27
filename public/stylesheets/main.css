@@ -1,0 +1,24 @@
+@import url("whitespace-reset.css");
+
+body {
+	background-color: black !important;
+	height:100%;
+}
+
+.container-fluid {
+    width: 40%;
+    margin: 8% auto 0 auto;
+}
+
+.square {
+    background-color: #3f587f;
+    border: 1px solid #ffffff;
+    height: 150px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+p {
+    font-size: 120px;
+    text-align: center;
+}
