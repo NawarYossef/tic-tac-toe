@@ -2,13 +2,23 @@ body {
   background-color: black !important;
   height: 100%; }
   body .container-fluid {
-    width: 100%;
-    margin: 8% auto 0 auto; }
+    width: 50%;
+    margin: 5% auto 0 auto; }
     body .container-fluid .square {
       background-color: #3f587f;
       border: 1px solid #ffffff;
       height: 150px;
       box-sizing: border-box;
       overflow: hidden; }
+  body .score {
+    width: 60%;
+    margin: 20px auto 0 auto; }
+  body table {
+    width: 60%;
+    margin: 0 auto; }
+    body table td {
+      width: 20%;
+      font: normal normal 17px/17px Raleway, sans-serif;
+      color: #ffffff; }
 
 /*# sourceMappingURL=sass.css.map */

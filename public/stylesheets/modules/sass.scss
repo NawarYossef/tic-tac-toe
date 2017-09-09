@@ -9,7 +9,7 @@ $mark-font: 105px;
 
 // === SIZES ===
 $body-height: 100%;
-$container-width: 100%;
+$container-width: 50%;
 $body-height: 100%;
 $square-height: 150px;
 
@@ -22,7 +22,7 @@ body {
 
 	.container-fluid {
     width: $container-width;
-    margin: 8% auto 0 auto;
+    margin: 5% auto 0 auto;
 
     	.square {
     	background-color: $square-color;
@@ -33,4 +33,21 @@ body {
 
 		}
 	}
+	
+	.score {
+		width: 60%;
+		margin: 20px auto 0 auto;
+	}
+	
+		table {
+			width: 60%;
+			margin: 0 auto;
+			
+			td {
+				width: 20%;
+				font: normal normal 17px/17px Raleway, sans-serif;
+				color: #ffffff;
+				// padding-right: 20px;
+			}
+		}
 }

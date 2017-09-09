@@ -1,0 +1,41 @@
+Modules: 
+
+- computer 
+    - moves
+    - play offensive
+    - play deffensive 
+
+
+
+- player 
+
+
+- score
+    
+
+- game modes and rules
+
+
+////
+modes: 
+
+          -- player vs computer
+player-first mode (player1 goes first then computer)
+
+if player won
+    player-first mode 
+else if computer won
+    computer-first mode 
+    
+end
+
+
+            -- player1 vs player2
+player1-first mode
+
+if player1 won
+    player1-first mode 
+else if player2 won
+    player2-first mode 
+    
+end
