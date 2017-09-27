@@ -27374,6 +27374,7 @@ let playerScore = 0
 let computerScore = 0
 
 let computerMark = ''
+let displayComChoice;
 
 let allPayerChoices = [];
 let allComputerChoices = [];
@@ -27387,6 +27388,9 @@ let winCombinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
                [1, 4, 7], [2, 5, 8], [3, 6, 9],
                [1, 5, 9], [3, 5, 7]];
 
+let playerAudio = document.createElement('audio');
+let computerAudio = document.createElement('audio');
+
 class Game {
   
   playerMove() {
@@ -27395,13 +27399,28 @@ class Game {
       let idVal = $(this).attr('id');
       that.getMarkedSquares(idVal);
       that.getEmptySquares();
-      $("#" + idVal).val(mark1)
+      that.playerMoveSound();
+      $('#' + idVal).val(mark1);
       that.stylePlayerChoice(idVal);
       that.collectPlayerChoices(idVal); 
       that.preventOverwriteChoice();
     });
   }
   
+  loadAudio() {
+    playerAudio.src = 'audio/player-sound.mp3'
+    computerAudio.src = 'audio/computer-sound.mp3'
+  }
+
+
+  playerMoveSound() {
+    playerAudio.play();
+  }
+
+  computerMoveSound() {
+    computerAudio.play();
+  }
+
   // any time you want to re-add the click listener:
   // this.setUpListener();
 
@@ -27420,36 +27439,41 @@ class Game {
     // })
   }
   
-  computerAi() {
-    // let that = this;
-    // $("input").click(function(){
-      winCombinations.forEach(function(comb) { 
-        // console.log(_.difference(comb, allPayerChoices))
-        if (_.difference(comb, allPayerChoices).length === 1) {
-          computerMark = _.difference(comb, allPayerChoices)[0];
-          return true
-        } 
-      })
-     return false
+  computerDefendAi() {
+    let funcReturn = false;
+    for (var i = 0; i < winCombinations.length; i++) {
+      let comb = winCombinations[i];
+      let playerWinningSquare = _.difference(comb, allPayerChoices)[0];
+
+      if ((_.difference(comb, allPayerChoices).length === 1) && allComputerChoices.includes(playerWinningSquare) === false) {
+        computerMark = playerWinningSquare;
+        funcReturn = true;
+        break;
+      } 
+    }
+    return funcReturn;
   }
   
   computerMove() {
     let that = this;
     console.log(emptySquares)
     $("input").click(function(){
-      // computerMark = _.shuffle(emptySquares)[0] // .shuffle is a lodash method
-      that.computerAi();
+      that.computerDefendAi() === false ? computerMark = _.shuffle(emptySquares)[0] : null;
       that.getMarkedSquares(computerMark); // store computer's choice into markedSquares array.
       that.getEmptySquares();
       that.collectComputerChoices(computerMark);
-      that.printComputerChoice(computerMark); // print computer choice
+      that.displayComputerChoice(computerMark); // print computer choice
       that.preventOverwriteChoice();
       that.computerStyleChoice(computerMark);
     });
   }
   
-  printComputerChoice(computerMark) {
-    $("#" + computerMark).val(mark2);
+  displayComputerChoice(computerMark) {
+    let that = this;
+    displayComChoice = setTimeout(function(){
+      that.computerMoveSound(); 
+      $('#' + computerMark).val(mark2); 
+    }, 1000);
   }
   
   computerStyleChoice(pos) {
@@ -27549,6 +27573,10 @@ class Game {
   resetEmptySquares() {
     emptySquares = [];
   }
+
+  resetDisplayComputerChoice(print) {
+    clearTimeout(displayComChoice);
+  }
   
   enableChoices() {
     $("input").each(function(ele) {
@@ -27556,16 +27584,16 @@ class Game {
     });
   }
   
-  gameScore() {
-    let that = this;
-    $("input").click(function(){
-      if (that.didPlayerWin() || that.didComputerWin() || that.updateTieScore()) {
-        that.updatePlayerScore();
-        that.updateComputerScore();
-        that.updateTieScore();
-      };
-    })
-  }
+  // gameScore() {
+  //   let that = this;
+  //   $("input").click(function(){
+  //     if (that.didPlayerWin() || that.didComputerWin() || that.updateTieScore()) {
+  //       that.updatePlayerScore();
+  //       that.updateComputerScore();
+  //       that.updateTieScore();
+  //     };
+  //   })
+  // }
   
   GameReset() {
     let that = this;
@@ -27577,6 +27605,7 @@ class Game {
         that.resetComputer();
         that.resetMarkedSquares();
         that.resetEmptySquares();
+        that.resetDisplayComputerChoice();
       }
     });
   }
@@ -27589,15 +27618,14 @@ class Game {
   
   
   play() {
+    this.loadAudio();
     this.playerMove();
     this.computerMove();
-    // this.gameScore();
     this.GameReset();
   }
   
 }
 
-// if anyone won
 var ttt = new Game();
 ttt.play();
 

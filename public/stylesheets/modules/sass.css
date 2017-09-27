@@ -7,18 +7,34 @@ body {
     body .container-fluid .square {
       background-color: #3f587f;
       border: 1px solid #ffffff;
+      color: #ffffff;
       height: 150px;
       box-sizing: border-box;
       overflow: hidden; }
+    body .container-fluid .sq1, body .container-fluid .sq4, body .container-fluid .sq7 {
+      border-left: none; }
+    body .container-fluid .sq3, body .container-fluid .sq6, body .container-fluid .sq9 {
+      border-right: none; }
+    body .container-fluid .sq1, body .container-fluid .sq2, body .container-fluid .sq3 {
+      border-top: none; }
+    body .container-fluid .sq7, body .container-fluid .sq8, body .container-fluid .sq9 {
+      border-bottom: none; }
   body .score {
     width: 60%;
     margin: 20px auto 0 auto; }
   body table {
     width: 60%;
     margin: 0 auto; }
+    body table th {
+      width: 20%;
+      color: #ffffff;
+      text-align: center;
+      font: bold normal 24px/17px Raleway, sans-serif; }
     body table td {
       width: 20%;
-      font: normal normal 17px/17px Raleway, sans-serif;
+      text-align: center;
+      padding-top: 10px;
+      font: normal normal 24px/17px Raleway, sans-serif;
       color: #ffffff; }
 
 /*# sourceMappingURL=sass.css.map */

@@ -1,4 +1,4 @@
-@import url("whitespace-reset.css");
+/*@import url("whitespace-reset.css");
 
 body {
 	background-color: black !important;
@@ -12,6 +12,7 @@ body {
 
 .square {
     background-color: #3f587f;
+    color: #ffffff;
     border: 1px solid #ffffff;
     height: 150px;
     box-sizing: border-box;
@@ -22,3 +23,18 @@ p {
     font-size: 120px;
     text-align: center;
 }
+
+
+.working {
+    opacity: 0;    
+}
+
+
+.new {
+    opacity: 1;
+    -webkit-transition: opacity 1.0s ease-in;
+    -moz-transition: opacity 1.0s ease-in;
+    -o-transition: opacity 1.0s ease-in;
+}
+
+*/

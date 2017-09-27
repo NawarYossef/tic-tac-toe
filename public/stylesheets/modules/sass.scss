@@ -27,10 +27,27 @@ body {
     	.square {
     	background-color: $square-color;
     	border: 1px solid $border-color;
+    	color: #ffffff;
     	height: $square-height;
     	box-sizing: border-box;
     	overflow: hidden;
 
+		}
+		
+		.sq1, .sq4, .sq7 {
+			border-left: none;
+		}
+
+		.sq3, .sq6, .sq9 {
+			border-right: none;
+		}
+
+		.sq1, .sq2, .sq3 {
+			border-top: none;
+		}
+
+		.sq7, .sq8, .sq9 {
+			border-bottom: none;
 		}
 	}
 	
@@ -42,12 +59,23 @@ body {
 		table {
 			width: 60%;
 			margin: 0 auto;
+
+			th {
+				width: 20%;
+				color: #ffffff;
+				text-align: center;
+				font: bold normal 24px/17px Raleway, sans-serif;
+
+			}
 			
 			td {
 				width: 20%;
-				font: normal normal 17px/17px Raleway, sans-serif;
+				text-align: center;
+				padding-top: 10px;
+				font: normal normal 24px/17px Raleway, sans-serif;
 				color: #ffffff;
 				// padding-right: 20px;
 			}
 		}
+
 }
