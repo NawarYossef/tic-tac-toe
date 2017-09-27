@@ -1,13 +1,19 @@
 /* global $ */
 
-// things to be done : 
+// make first move
 
-// fix game reset
-// computer Ai
-// timing
-// add sound
-// end game flash effect
-// refactor code
+// defend:
+// go through player choices
+// go thorugh winCombs
+// if a winCom includes two player choies then choose  the third as computer mark
+
+
+//attack:
+//  go thorugh winCombs
+// if computer choices include two choies from a comb, then choose third
+
+//random:
+// just make a random move
 
 
 "use strict";
@@ -23,6 +29,7 @@ let tieScore = 0
 let playerScore = 0
 let computerScore = 0
 
+let computerMark = ''
 
 let allPayerChoices = [];
 let allComputerChoices = [];
@@ -40,62 +47,75 @@ class Game {
   
   playerMove() {
     let that = this;
-    $(document).ready(function(){
-      $(".square").click(function(event){
-        let idVal = $(this).attr('id');
-        that.getMarkedSquares(idVal);
-        that.getEmptySquares();
-        $("#" + idVal).text(mark1)
-        that.stylePlayerChoice(idVal);
-        that.collectPlayerChoices(idVal); 
-        that.preventOverwriteChoice();
-        that.updatePlayerScore();
-        that.updateTieScore()
-      });
+    $("input").click(function(event){
+      let idVal = $(this).attr('id');
+      that.getMarkedSquares(idVal);
+      that.getEmptySquares();
+      $("#" + idVal).val(mark1)
+      that.stylePlayerChoice(idVal);
+      that.collectPlayerChoices(idVal); 
+      that.preventOverwriteChoice();
     });
   }
+  
+  // any time you want to re-add the click listener:
+  // this.setUpListener();
+
+
 
   stylePlayerChoice(val){
-    $(document).ready(function(){
-      $("#" + val).css("font-size", "105px");
-      $("#" + val).css("padding-left", "50px");
-      });
+    $("#" + val).css("font-size", "105px");
+    $("#" + val).css("padding-left", "50px");
+  }
+  
+  computerDefendAi() {
+    // winCombinations.forEach(function(comb) {
+    //   _.difference(comb, allPayerChoices).length === comb.length ? 
+    // computerMark = _.shuffle(emptySquares)[0];
+     
+    // })
+  }
+  
+  computerAi() {
+    // let that = this;
+    // $("input").click(function(){
+      winCombinations.forEach(function(comb) { 
+        // console.log(_.difference(comb, allPayerChoices))
+        if (_.difference(comb, allPayerChoices).length === 1) {
+          computerMark = _.difference(comb, allPayerChoices)[0];
+          return true
+        } 
+      })
+     return false
   }
   
   computerMove() {
     let that = this;
-    $(document).ready(function(){
-      $(".square").click(function(){
-        let computerMark = _.shuffle(emptySquares)[0]; // .shuffle is a lodash method
-        that.getMarkedSquares(computerMark); // store computer's choice into markedSquares array.
-        that.getEmptySquares();
-        that.collectComputerChoices(computerMark);
-        that.printComputerChoice(computerMark); // print computer choice
-        that.preventOverwriteChoice();
-        that.computerStyleChoice(computerMark);
-        that.updateComputerScore();
-      });
+    console.log(emptySquares)
+    $("input").click(function(){
+      // computerMark = _.shuffle(emptySquares)[0] // .shuffle is a lodash method
+      that.computerAi();
+      that.getMarkedSquares(computerMark); // store computer's choice into markedSquares array.
+      that.getEmptySquares();
+      that.collectComputerChoices(computerMark);
+      that.printComputerChoice(computerMark); // print computer choice
+      that.preventOverwriteChoice();
+      that.computerStyleChoice(computerMark);
     });
   }
   
   printComputerChoice(computerMark) {
-    $(document).ready(function(){
-      $("#" + computerMark).text(mark2);
-    });
+    $("#" + computerMark).val(mark2);
   }
   
   computerStyleChoice(pos) {
-    $(document).ready(function(){
     $("#" + pos).css("font-size", "105px");
-    });
   }
   
   preventOverwriteChoice(){
-    $(document).ready(function(){
-      markedSquares.forEach(function(ele) {
-        $("#" + ele).off("click")
-      });
-    })
+    markedSquares.forEach(function(ele) {
+      $("#" + ele).prop('disabled', true);;
+    });
   }
   
   getMarkedSquares(idVal) {
@@ -127,13 +147,11 @@ class Game {
   
   updateTieScore() {
     let that = this;
-    $(document).ready(function(){
       // markedSquares array has a NaN value stored as the last computer input in each game. therefore, length comparison between markedSquares and allSquares arrays must be done without counting that 'NaN' value as an index (markedSquares.length - 1)
-      if ((markedSquares.length - 1 === allSquares.length) && (that.didPlayerWin() === false && that.didComputerWin() === false)) {
-        $(".tie-score").text(tieScore += 1);
-        return true;
-      }
-    });
+    if ((markedSquares.length - 1 === allSquares.length) && (that.didPlayerWin() === false && that.didComputerWin() === false)) {
+      $(".tie-score").text(tieScore += 1);
+      return true;
+    }
   }
   
   didComputerWin() {
@@ -144,11 +162,14 @@ class Game {
     return funcReturn;
   }
   
-  updateComputerScore(val) {
+  updateComputerScore() {
+    let funcReturn = false
     let that = this;
-    $(document).ready(function(){
-      that.didComputerWin() ? $(".computer-score").text(computerScore += 1) : null;
-    });
+    if (that.didComputerWin()) {
+      $(".computer-score").text(computerScore += 1)
+      funcReturn = true
+    } 
+    return funcReturn
   }
   
   didPlayerWin() {
@@ -159,68 +180,81 @@ class Game {
     return funcReturn;
   }
   
-  updatePlayerScore(val) {
+  updatePlayerScore() {
+    let funcReturn = false
     let that = this;
-    $(document).ready(function(){
-      that.didPlayerWin() ? $(".player-score").text(playerScore += 1) : null;
-      that.resetPlayer();
-    });
+    if (that.didPlayerWin()) {
+      $(".player-score").text(playerScore += 1)
+      funcReturn = true
+    } 
+    return funcReturn
   }
   
   resetPlayer() {
     allPayerChoices = [];
   }
-  gameReset() {
-    let that = this;
-    $(document).ready(function(){
-      $(".square").click(function(){
-        if (that.updatePlayerScore() || that.updateComputerScore() || that.updateTieScore()) {
-          allPayerChoices = [];
-          allComputerChoices = [];
-          markedSquares = [];
-          emptySquares = []; 
-          that.boardEmpty();
-        };
-      });
-    })
+  
+  resetComputer() {
+    allComputerChoices = [];
   }
   
-  boardEmpty() {
-    $(document).ready(function(){
-      $(".square").each(function(){
-        $(this).empty();
-       
-      });
+  resetMarkedSquares() {
+    markedSquares = [];
+  }
+  
+  resetEmptySquares() {
+    emptySquares = [];
+  }
+  
+  enableChoices() {
+    $("input").each(function(ele) {
+      $(this).prop('disabled', false);
     });
   }
   
-  // bb() {
-  //   let that = this
-  //   $(document).ready(function(){
-  //     allSquares.forEach(function(ele) {
-  //       $("#" + ele).on("click", that.playerMove())
-  //       // $("#" + ele).on("click", that.computerMove())
-  //     })
-  //   });
-  // }
+  gameScore() {
+    let that = this;
+    $("input").click(function(){
+      if (that.didPlayerWin() || that.didComputerWin() || that.updateTieScore()) {
+        that.updatePlayerScore();
+        that.updateComputerScore();
+        that.updateTieScore();
+      };
+    })
+  }
   
+  GameReset() {
+    let that = this;
+    $("input").click(function(){
+      if (that.updateComputerScore() || that.updatePlayerScore() || that.updateTieScore()) {
+        that.enableChoices();
+        that.boardEmpty();
+        that.resetPlayer();
+        that.resetComputer();
+        that.resetMarkedSquares();
+        that.resetEmptySquares();
+      }
+    });
+  }
+  
+  boardEmpty() {
+    $("input").each(function(){
+      $(this).val('');
+    });
+  }
   
   
   play() {
     this.playerMove();
     this.computerMove();
-    this.gameReset();
+    // this.gameScore();
+    this.GameReset();
   }
-}
   
+}
+
+// if anyone won
 var ttt = new Game();
-
 ttt.play();
- 
-   
-
-
-
-
 
 
