@@ -1,7 +1,7 @@
 // @import url("whitespace-reset.css");
 
 // === COLORS ===
-$square-color: #3f587f;
+$square-color: #8a7f3d;
 $border-color: #ffffff;
 
 // === FONTS ===
@@ -19,15 +19,21 @@ $square-height: 150px;
 body {
 	background-color: black !important;
 	height: $body-height;
-
+	
+	h1 {
+		color: #7e314c;
+		font: normal normal 55px/17px 'Permanent Marker', cursive, sans-serif;
+		margin: 3% auto 0 auto;
+		width: 24%;
+	}
 	.container-fluid {
     width: $container-width;
-    margin: 5% auto 0 auto;
-
+    margin: 3% auto 0 auto;
+	
     	.square {
     	background-color: $square-color;
     	border: 1px solid $border-color;
-    	color: #ffffff;
+    	color: #222020;
     	height: $square-height;
     	box-sizing: border-box;
     	overflow: hidden;
@@ -62,7 +68,7 @@ body {
 
 			th {
 				width: 20%;
-				color: #ffffff;
+				color: #6361e5;
 				text-align: center;
 				font: bold normal 24px/17px Raleway, sans-serif;
 
@@ -72,7 +78,7 @@ body {
 				width: 20%;
 				text-align: center;
 				padding-top: 10px;
-				font: normal normal 24px/17px Raleway, sans-serif;
+				font: bold normal 26px/17px Raleway, sans-serif;
 				color: #ffffff;
 				// padding-right: 20px;
 			}

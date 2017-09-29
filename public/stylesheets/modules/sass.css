@@ -1,13 +1,18 @@
 body {
   background-color: black !important;
   height: 100%; }
+  body h1 {
+    color: #7e314c;
+    font: normal normal 55px/17px 'Permanent Marker', cursive, sans-serif;
+    margin: 3% auto 0 auto;
+    width: 24%; }
   body .container-fluid {
     width: 50%;
-    margin: 5% auto 0 auto; }
+    margin: 3% auto 0 auto; }
     body .container-fluid .square {
-      background-color: #3f587f;
+      background-color: #8a7f3d;
       border: 1px solid #ffffff;
-      color: #ffffff;
+      color: #222020;
       height: 150px;
       box-sizing: border-box;
       overflow: hidden; }
@@ -27,14 +32,14 @@ body {
     margin: 0 auto; }
     body table th {
       width: 20%;
-      color: #ffffff;
+      color: #6361e5;
       text-align: center;
       font: bold normal 24px/17px Raleway, sans-serif; }
     body table td {
       width: 20%;
       text-align: center;
       padding-top: 10px;
-      font: normal normal 24px/17px Raleway, sans-serif;
+      font: bold normal 26px/17px Raleway, sans-serif;
       color: #ffffff; }
 
 /*# sourceMappingURL=sass.css.map */
