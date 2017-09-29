@@ -27635,14 +27635,14 @@ clearTimeout(computerChoiceSound);
     $("input").click(function(){
 
       if (that.didComputerWin()) {
-        that.winningMessage();
+        // that.winningMessage();
         that.gameReset();
 
       } else if (that.isGameTie()) {
           that.tieMessage();
           that.gameReset();
       } else if (that.didPlayerWin()) {
-          that.winningMessage();
+          // that.winningMessage();
           that.resetDisplayComputerChoice();
           that.stopComputerAudio(); 
           that.gameReset();
