@@ -7,8 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Nawar Yossef",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NawarYossef/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/NawarYossef/tic-tac-toe#readme",
   "dependencies": {
     "browserify": "^14.4.0",
     "express": "^4.15.3",
